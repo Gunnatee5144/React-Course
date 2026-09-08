@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px; padding: 44px 40px 52px;
+    font-family: "Noto Sans Thai", "Sukhumvit Set", "Helvetica Neue", Arial, sans-serif;
+    background: #f8fafc; color: #0f172a;
+  }
+  .tag { font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+         color: #64748b; font-weight: 700; text-align: center; margin-bottom: 10px; }
+  h1 { font-size: 30px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .sub { font-size: 15px; color: #64748b; text-align: center; margin-bottom: 34px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { display: flex; align-items: center; gap: 14px;
+          background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+          padding: 18px; box-shadow: 0 1px 3px rgba(15,23,42,.08); }
+  .card.lead { border: 2px solid #7c3aed; box-shadow: 0 6px 16px rgba(124,58,237,.16); }
+  .avatar { width: 48px; height: 48px; border-radius: 9999px; background: #2563eb;
+            color: #fff; font-weight: 700; font-size: 19px;
+            display: flex; align-items: center; justify-content: center; flex: none; }
+  .avatar.lg { width: 64px; height: 64px; font-size: 25px; background: #7c3aed; }
+  .body { flex: 1; min-width: 0; }
+  .name { font-weight: 700; font-size: 16px; }
+  .role { font-size: 13px; color: #64748b; margin: 2px 0 8px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; }
+  .online  { background: #dcfce7; color: #15803d; }
+  .away    { background: #fef9c3; color: #a16207; }
+  .offline { background: #f1f5f9; color: #475569; }
+  .leadb   { background: #ede9fe; color: #6d28d9; }
+  .note { margin-top: 30px; font-size: 12px; color: #94a3b8; text-align: center; }
+</style></head>
+<body>
+  <div class="tag">Mockup · Lab Day 1</div>
+  <h1>ทีมของเรา</h1>
+  <p class="sub">การ์ดทุกใบมาจาก <code>src/data/users.js</code> array เดียว — เพิ่มคนที่ 7 ในไฟล์นั้นแล้วการ์ดต้องโผล่เอง</p>
+  <div class="grid">
+    <div class="card lead">
+      <div class="avatar lg">ส</div>
+      <div class="body">
+        <div class="name">สมชาย ใจดี</div>
+        <div class="role">Frontend Developer · Engineering</div>
+        <div class="badges"><span class="badge online">ออนไลน์</span><span class="badge leadb">หัวหน้าทีม</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="avatar">ส</div>
+      <div class="body">
+        <div class="name">สมหญิง รักเรียน</div>
+        <div class="role">UX Designer · Design</div>
+        <div class="badges"><span class="badge away">ไม่อยู่ที่โต๊ะ</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="avatar">ว</div>
+      <div class="body">
+        <div class="name">วิชัย เก่งกาจ</div>
+        <div class="role">Backend Developer · Engineering</div>
+        <div class="badges"><span class="badge offline">ออฟไลน์</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="avatar">ม</div>
+      <div class="body">
+        <div class="name">มานี มีนา</div>
+        <div class="role">Product Manager · Product</div>
+        <div class="badges"><span class="badge online">ออนไลน์</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="avatar">ป</div>
+      <div class="body">
+        <div class="name">ประยุทธ ตั้งใจ</div>
+        <div class="role">QA Engineer · Engineering</div>
+        <div class="badges"><span class="badge online">ออนไลน์</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="avatar">อ</div>
+      <div class="body">
+        <div class="name">อรุณี แจ่มใส</div>
+        <div class="role">Data Analyst · Data</div>
+        <div class="badges"><span class="badge away">ไม่อยู่ที่โต๊ะ</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Avatar = ตัวอักษรแรกของชื่อ · Badge = children ไม่ใช่ prop ชื่อ text · การ์ดหัวหน้าทีม = ขอบหนา + วงกลมใหญ่กว่า + ป้ายม่วงเพิ่ม 1 ใบ · จอเล็กเหลือ 1 คอลัมน์</p>
+</body></html>
