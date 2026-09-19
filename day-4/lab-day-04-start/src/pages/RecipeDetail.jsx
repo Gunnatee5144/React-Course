@@ -33,7 +33,7 @@ function RecipeDetail() {
       <Link to="/recipes" className="text-xs text-gray-500">← กลับ</Link>
       <h2 className="text-lg font-extrabold mt-1">{meal.strMeal}</h2>
       <p className="text-xs text-gray-500 mb-3">{meal.strCategory} · {meal.strArea}</p>
-      <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded-lg w-full max-w-sm mb-3" />
+      <img src={meal.strMealThumb} alt={meal.strMeal} loading="lazy" className="rounded-lg w-full max-w-sm mb-3" />
       <div className="text-sm font-extrabold mb-1">ส่วนผสม</div>
       <p className="text-sm text-slate-700 leading-relaxed">
         {ingredients.map((line, i) => (

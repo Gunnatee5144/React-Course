@@ -1,22 +1,26 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
-import Home from './pages/Home.jsx'
-import Recipes from './pages/Recipes.jsx'
-import RecipeDetail from './pages/RecipeDetail.jsx'
-import About from './pages/About.jsx'
-import NotFound from './pages/NotFound.jsx'
+
+const Home = lazy(() => import('./pages/Home.jsx'))
+const Recipes = lazy(() => import('./pages/Recipes.jsx'))
+const RecipeDetail = lazy(() => import('./pages/RecipeDetail.jsx'))
+const About = lazy(() => import('./pages/About.jsx'))
+const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="recipes" element={<Recipes />} />
-        <Route path="recipes/:id" element={<RecipeDetail />} />
-        <Route path="about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<div className="p-6 text-gray-500 text-sm">กำลังโหลด...</div>}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="recipes" element={<Recipes />} />
+          <Route path="recipes/:id" element={<RecipeDetail />} />
+          <Route path="about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
 
