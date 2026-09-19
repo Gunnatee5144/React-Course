@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #f8fafc; }
+  body {
+    width: 1240px; padding: 36px 32px 40px;
+    font-family: "Noto Sans Thai", "Sukhumvit Set", "Helvetica Neue", Arial, sans-serif;
+    color: #0f172a;
+  }
+  .tag { font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+         color: #64748b; font-weight: 700; text-align: center; margin-bottom: 8px; }
+  h1.title { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .sub { font-size: 14px; color: #64748b; text-align: center; margin-bottom: 24px; }
+
+  .row { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; }
+  .col { display: flex; flex-direction: column; gap: 20px; }
+
+  .win { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;
+         box-shadow: 0 1px 3px rgba(15,23,42,.06); }
+  .bar { display: flex; align-items: center; gap: 8px; background: #f1f5f9; padding: 8px 12px;
+         border-bottom: 1px solid #e2e8f0; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; }
+  .url { flex: 1; margin-left: 8px; background: #fff; border: 1px solid #e2e8f0; border-radius: 6px;
+         padding: 4px 10px; font: 12px ui-monospace, Menlo, monospace; color: #475569; }
+  .url b { color: #c2410c; font-weight: 700; }
+  .label { font-size: 11px; font-weight: 700; color: #64748b; letter-spacing: .04em; }
+
+  nav { display: flex; gap: 20px; padding: 12px 18px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+  nav span { color: #4b5563; }
+  nav span.active { color: #ea580c; font-weight: 700; }
+  main { padding: 16px 18px; }
+  footer { border-top: 1px solid #e2e8f0; padding: 8px; text-align: center; font-size: 11px; color: #94a3b8; }
+
+  h2 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+  .field { border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 12px; font-size: 14px; margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .card { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+  .thumb { aspect-ratio: 4 / 3; }
+  .card p { font-size: 12px; font-weight: 600; padding: 6px 8px; }
+
+  .back { font-size: 12px; color: #64748b; }
+  .meta { font-size: 12px; color: #64748b; margin: 2px 0 10px; }
+  .hero { height: 120px; border-radius: 8px; margin-bottom: 10px;
+          background: linear-gradient(135deg,#fdba74,#c2410c); }
+  .h3 { font-size: 13px; font-weight: 800; margin: 6px 0 4px; }
+  .ing { font-size: 12px; color: #334155; line-height: 1.6; }
+
+  .center { text-align: center; padding: 22px 10px; }
+  .big { font-size: 22px; font-weight: 800; }
+  .muted { font-size: 13px; color: #64748b; margin: 6px 0 12px; }
+  .btn { display: inline-block; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px; font-size: 13px; }
+  .link { color: #ea580c; text-decoration: underline; font-size: 13px; }
+
+  .note { margin-top: 20px; font-size: 12px; color: #94a3b8; text-align: center; line-height: 1.6; }
+  .note b { color: #64748b; }
+  code { font-family: ui-monospace, Menlo, monospace; }
+</style></head>
+<body>
+  <div class="tag">Mockup · Lab Day 4 — 🎯 มินิแอป #2</div>
+  <h1 class="title">Recipe Browser</h1>
+  <p class="sub">หน้าต่างเดียวกันทุกหน้า: Nav + Footer มาจาก <code>Layout.jsx</code> ที่เดียว · เนื้อหาตรงกลางคือ <code>&lt;Outlet /&gt;</code> · URL ในแถบที่อยู่ = สิ่งที่อยู่บนจอเสมอ</p>
+
+  <div class="row">
+    <!-- /recipes?q=chicken -->
+    <div class="win">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">localhost:5173/recipes<b>?q=chicken</b></span><span class="label">Lab B · B2</span></div>
+      <nav><span>หน้าแรก</span><span class="active">สูตรอาหาร</span><span>เกี่ยวกับ</span></nav>
+      <main>
+        <h2>สูตรอาหาร</h2>
+        <div class="field">chicken</div>
+        <div class="grid">
+          <div class="card"><div class="thumb" style="background:#fbbf24"></div><p>Chicken Handi</p></div>
+          <div class="card"><div class="thumb" style="background:#f97316"></div><p>Chicken Congee</p></div>
+          <div class="card"><div class="thumb" style="background:#84cc16"></div><p>Chicken Couscous</p></div>
+          <div class="card"><div class="thumb" style="background:#ef4444"></div><p>Kung Pao Chicken</p></div>
+          <div class="card"><div class="thumb" style="background:#a16207"></div><p>Chicken Karaage</p></div>
+          <div class="card"><div class="thumb" style="background:#fb923c"></div><p>Chicken Marengo</p></div>
+          <div class="card"><div class="thumb" style="background:#65a30d"></div><p>Chicken Basquaise</p></div>
+          <div class="card"><div class="thumb" style="background:#dc2626"></div><p>Tandoori Chicken</p></div>
+        </div>
+      </main>
+      <footer>© 2026 DII CAMT · ข้อมูลจาก TheMealDB</footer>
+    </div>
+
+    <div class="col">
+      <!-- /recipes/52772 -->
+      <div class="win">
+        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="url">localhost:5173/recipes/<b>52772</b></span><span class="label">Lab B · B1</span></div>
+        <nav><span>หน้าแรก</span><span class="active">สูตรอาหาร</span><span>เกี่ยวกับ</span></nav>
+        <main>
+          <span class="back">← กลับ</span>
+          <h2 style="margin:6px 0 0">Teriyaki Chicken Casserole</h2>
+          <p class="meta">Chicken · Japanese</p>
+          <div class="hero"></div>
+          <div class="h3">ส่วนผสม</div>
+          <div class="ing">• 3/4 cup soy sauce · • 1/2 cup water · • 1/4 cup brown sugar …</div>
+        </main>
+      </div>
+
+      <!-- 404 + not found -->
+      <div class="row" style="grid-template-columns:1fr 1fr; gap:14px">
+        <div class="win">
+          <div class="bar"><span class="url">/<b>asdf</b></span></div>
+          <div class="center"><div class="big">404</div><div class="muted">ไม่พบหน้านี้</div><span class="link">← กลับหน้าแรก</span></div>
+        </div>
+        <div class="win">
+          <div class="bar"><span class="url">/recipes/<b>99999</b></span></div>
+          <div class="center"><div class="muted" style="margin-top:14px">ไม่พบสูตรนี้ (id: 99999)</div><span class="btn">← กลับไปหน้ารายการ</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">
+    เมนู <b>"สูตรอาหาร"</b> ต้องยัง active ตอนอยู่ <code>/recipes/52772</code> · เมนู <b>"หน้าแรก"</b> ต้องมี <code>end</code> ไม่งั้นเข้มค้างทุกหน้า<br>
+    copy <code>/recipes?q=chicken</code> ไปเปิดแท็บใหม่ → ช่องค้นหาต้องขึ้น "chicken" และผลลัพธ์ตรงทันที · <code>/recipes/99999</code> → "ไม่พบสูตรนี้" ไม่ใช่จอขาว
+  </p>
+</body></html>

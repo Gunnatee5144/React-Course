@@ -1,0 +1,12 @@
+{
+  "octocat": {
+    "login": "octocat", "name": "The Octocat",
+    "avatar_url": "https://github.com/octocat.png",
+    "bio": "GitHub's mascot.", "followers": 12000, "public_repos": 8
+  },
+  "torvalds": {
+    "login": "torvalds", "name": "Linus Torvalds",
+    "avatar_url": "https://github.com/torvalds.png",
+    "bio": "Creator of Linux and Git.", "followers": 219000, "public_repos": 6
+  }
+}

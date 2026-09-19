@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #f8fafc; }
+  body {
+    width: 960px; padding: 40px 32px 48px;
+    font-family: "Noto Sans Thai", "Sukhumvit Set", "Helvetica Neue", Arial, sans-serif;
+    color: #0f172a;
+  }
+  .tag { font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+         color: #64748b; font-weight: 700; text-align: center; margin-bottom: 10px; }
+  h1 { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .sub { font-size: 14px; color: #64748b; text-align: center; margin-bottom: 28px; }
+
+  .toolbar { display: flex; gap: 12px; margin-bottom: 14px; }
+  .field-wrap { flex: 1; }
+  .field-wrap.narrow { flex: 0 0 220px; }
+  .label-text { display: block; font-size: 12px; color: #475569; margin-bottom: 4px; font-weight: 600; }
+  .field { width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 9px 12px;
+           font-size: 14px; color: #0f172a; background: #fff; }
+  .field.placeholder { color: #94a3b8; }
+
+  .status-row { display: flex; align-items: center; justify-content: space-between;
+                margin-bottom: 18px; }
+  .count { font-size: 13px; color: #475569; }
+  .count b { color: #0f172a; }
+  .clear-btn { font-size: 13px; color: #2563eb; border: 1px solid #bfdbfe; background: #eff6ff;
+               padding: 6px 12px; border-radius: 8px; font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 14px;
+          display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px;
+          box-shadow: 0 1px 3px rgba(15,23,42,.06); }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-weight: 800; font-size: 20px; color: #fff; margin-bottom: 4px; }
+  .login { font-size: 14px; font-weight: 700; }
+  .bio { font-size: 12px; color: #64748b; line-height: 1.4; min-height: 32px; }
+  .followers { font-size: 12px; font-weight: 700; color: #0f172a; background: #f1f5f9;
+               padding: 3px 10px; border-radius: 999px; margin-top: 2px; }
+  .followers.unknown { color: #94a3b8; background: #f8fafc; font-weight: 600; font-style: italic; }
+
+  .section-tag { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #94a3b8;
+                 font-weight: 700; margin: 30px 0 10px; text-align: center; }
+  .empty-card { background: #fff; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 40px 20px;
+                text-align: center; }
+  .empty-card .emoji { font-size: 32px; margin-bottom: 10px; }
+  .empty-card .msg { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .empty-card .hint { font-size: 13px; color: #64748b; margin-bottom: 16px; }
+
+  .note { margin-top: 24px; font-size: 12px; color: #94a3b8; text-align: center; line-height: 1.6; }
+  .note b { color: #64748b; }
+</style></head>
+<body>
+  <div class="tag">Mockup · Lab Day 3 — GitHub User Browser</div>
+  <h1>GitHub User Browser</h1>
+  <p class="sub">Lab A: ข้อมูล static จาก <code>src/data/users.js</code> — ค้นหา + filter ทำงานทันทีตอนพิมพ์ (ยังไม่ต้อง submit จนกว่าจะถึง Lab B)</p>
+
+  <div class="toolbar">
+    <div class="field-wrap">
+      <span class="label-text">ค้นหา (login หรือ name)</span>
+      <div class="field placeholder">เช่น torvalds, dan...</div>
+    </div>
+    <div class="field-wrap narrow">
+      <span class="label-text">ผู้ติดตามขั้นต่ำ</span>
+      <div class="field">0</div>
+    </div>
+  </div>
+
+  <div class="status-row">
+    <div class="count">พบ <b>6</b> รายการ จากทั้งหมด 18 คน</div>
+    <div class="clear-btn">ล้างตัวกรอง</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="avatar" style="background:#0f172a">O</div>
+      <div class="login">octocat</div>
+      <div class="bio">GitHub's mascot.</div>
+      <div class="followers">12,000 ผู้ติดตาม</div>
+    </div>
+    <div class="card">
+      <div class="avatar" style="background:#1d4ed8">LT</div>
+      <div class="login">torvalds</div>
+      <div class="bio">Creator of Linux and Git.</div>
+      <div class="followers">219,000 ผู้ติดตาม</div>
+    </div>
+    <div class="card">
+      <div class="avatar" style="background:#7c3aed">DA</div>
+      <div class="login">gaearon</div>
+      <div class="bio">Working on React.</div>
+      <div class="followers">98,000 ผู้ติดตาม</div>
+    </div>
+    <div class="card">
+      <div class="avatar" style="background:#0ea5e9">SS</div>
+      <div class="login">sindresorhus</div>
+      <div class="bio">Full-time open-sourcerer.</div>
+      <div class="followers">60,000 ผู้ติดตาม</div>
+    </div>
+    <div class="card">
+      <div class="avatar" style="background:#16a34a">AO</div>
+      <div class="login">addyosmani</div>
+      <div class="bio">Engineering leader working on Chrome.</div>
+      <div class="followers unknown">ยังไม่ทราบจำนวนผู้ติดตาม</div>
+    </div>
+    <div class="card">
+      <div class="avatar" style="background:#dc2626">EY</div>
+      <div class="login">yyx990803</div>
+      <div class="bio">Creator of Vue.js.</div>
+      <div class="followers">92,000 ผู้ติดตาม</div>
+    </div>
+  </div>
+
+  <div class="section-tag">เมื่อไม่พบผลลัพธ์ (empty state)</div>
+  <div class="empty-card">
+    <div class="emoji">🔍</div>
+    <div class="msg">ไม่พบผู้ใช้ที่ตรงกับเงื่อนไข</div>
+    <div class="hint">ลองลดค่า "ผู้ติดตามขั้นต่ำ" หรือแก้คำค้นหา</div>
+    <div class="clear-btn" style="display:inline-block">ล้างตัวกรอง</div>
+  </div>
+
+  <p class="note">
+    Grid: มือถือ 1 คอลัมน์ · จอใหญ่ 3–4 คอลัมน์ &nbsp;·&nbsp;
+    <b>addyosmani</b> ไม่มี <code>followers</code> ในข้อมูลจริง — ต้องแสดง "ยังไม่ทราบจำนวนผู้ติดตาม" ไม่ใช่ <code>NaN</code>/<code>undefined</code><br>
+    list ต้อง render ด้วย <code>.map()</code> และ <code>key</code> ที่ไม่ใช่ index — เตรียมแคปหน้าจอบั๊ก <code>key={index}</code> ก่อน/หลังแก้ใส่ README
+  </p>
+</body></html>
