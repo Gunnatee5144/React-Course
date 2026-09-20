@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup — ระบบจองห้องประชุม (Lab วันที่ 5)</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}</style>
+</head>
+<body class="bg-gray-100 p-6">
+<p class="mx-auto mb-6 max-w-4xl rounded border border-amber-300 bg-amber-50 p-3 text-sm">
+  🖼 <b>นี่คือภาพเป้าหมายเท่านั้น</b> — ไม่ต้องลอกโค้ดจากไฟล์นี้ (ไม่มี React อยู่ในนี้) ดูว่าหน้าตาควรออกมาประมาณไหน แล้วเขียนเองด้วย React
+</p>
+
+<!-- ============ หน้า 1: เลือกเวลา ============ -->
+<p class="mx-auto max-w-4xl text-xs font-bold text-gray-500">หน้า /  — เลือกช่วงเวลา</p>
+<div class="mx-auto mb-8 max-w-4xl overflow-hidden rounded-lg border bg-white shadow-sm">
+  <header class="flex items-center justify-between border-b bg-white px-4 py-3">
+    <span class="text-lg font-bold">🏢 จองห้องประชุม</span>
+    <span class="text-sm text-blue-600 underline">จองแล้ว 3 ชม. / สูงสุด 4 ชม.</span>
+  </header>
+  <div class="p-6">
+    <h1 class="text-2xl font-bold">ห้องประชุม Innovation 4A</h1>
+    <p class="mt-1 text-sm text-gray-500">ความจุ 12 ที่นั่ง · จองได้ครั้งละไม่เกิน 4 ชั่วโมง และต้องเป็นวันเดียวกัน</p>
+    <div class="mt-6 grid grid-cols-5 gap-2" id="grid"></div>
+    <div class="mt-4 flex flex-wrap gap-4 text-xs text-gray-500">
+      <span><span class="mr-1 inline-block h-3 w-3 rounded border border-blue-600 bg-blue-600 align-middle"></span>เลือกอยู่</span>
+      <span><span class="mr-1 inline-block h-3 w-3 rounded border border-gray-200 bg-gray-100 align-middle"></span>ฝ่ายอื่นจองแล้ว (กดไม่ได้)</span>
+      <span><span class="mr-1 inline-block h-3 w-3 rounded border border-gray-200 bg-white align-middle"></span>กดไม่ได้ — คนละวันกับที่เลือกไว้</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ หน้า 2: สรุป ============ -->
+<p class="mx-auto max-w-4xl text-xs font-bold text-gray-500">หน้า /summary — รายการที่เลือก</p>
+<div class="mx-auto mb-8 max-w-4xl rounded-lg border bg-white p-6 shadow-sm">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold">รายการที่เลือก (3/4 ชม.)</h1>
+    <span class="text-sm text-red-600 underline">ล้างทั้งหมด</span>
+  </div>
+  <ul class="mt-4 divide-y rounded border">
+    <li class="flex items-center justify-between px-4 py-3"><span>จันทร์ 09:00–10:00</span><span class="rounded border border-red-600 px-3 py-1 text-sm text-red-600">เอาออก</span></li>
+    <li class="flex items-center justify-between px-4 py-3"><span>จันทร์ 10:00–11:00</span><span class="rounded border border-red-600 px-3 py-1 text-sm text-red-600">เอาออก</span></li>
+    <li class="flex items-center justify-between px-4 py-3"><span>จันทร์ 13:00–14:00</span><span class="rounded border border-red-600 px-3 py-1 text-sm text-red-600">เอาออก</span></li>
+  </ul>
+  <span class="mt-6 inline-block rounded bg-blue-600 px-4 py-2 font-semibold text-white">ยืนยันการจอง</span>
+</div>
+
+<!-- ============ หน้า 3: ฟอร์ม ============ -->
+<p class="mx-auto max-w-4xl text-xs font-bold text-gray-500">หน้า /confirm — ฟอร์มยืนยัน (แสดงตอนมี error เพื่อให้เห็นตำแหน่งข้อความ)</p>
+<div class="mx-auto mb-8 max-w-4xl rounded-lg border bg-white p-6 shadow-sm">
+  <h1 class="mb-1 text-2xl font-bold">ยืนยันการจอง</h1>
+  <p class="mb-6 text-sm text-gray-500">รวม 3 ชั่วโมง</p>
+  <div class="max-w-lg">
+    <label class="mb-4 block"><span class="text-sm font-medium">ชื่อผู้จอง</span>
+      <input value="สมชาย ใจดี" class="mt-1 w-full rounded border px-3 py-2"></label>
+    <label class="mb-4 block"><span class="text-sm font-medium">แผนก</span>
+      <select class="mt-1 w-full rounded border px-3 py-2"><option>— เลือกแผนก —</option></select>
+      <p class="mt-1 text-sm text-red-600">กรุณาเลือกแผนก</p></label>
+    <label class="mb-4 block"><span class="text-sm font-medium">อีเมล</span>
+      <input value="somchai@dii.ac.th" class="mt-1 w-full rounded border px-3 py-2"></label>
+    <label class="mb-4 block"><span class="text-sm font-medium">ยืนยันอีเมลอีกครั้ง</span>
+      <input value="somchai@dii.ac" class="mt-1 w-full rounded border px-3 py-2">
+      <p class="mt-1 text-sm text-red-600">อีเมลไม่ตรงกัน</p></label>
+    <label class="mb-4 block"><span class="text-sm font-medium">วัตถุประสงค์การใช้ห้อง</span>
+      <textarea rows="3" class="mt-1 w-full rounded border px-3 py-2">ประชุม</textarea>
+      <p class="mt-1 text-sm text-red-600">อธิบายวัตถุประสงค์อย่างน้อย 10 ตัวอักษร</p></label>
+    <div class="w-full rounded bg-blue-600 py-3 text-center font-semibold text-white">ยืนยันการจอง</div>
+  </div>
+</div>
+
+<script>
+const DAYS=[['จ','จันทร์'],['อ','อังคาร'],['พ','พุธ'],['พฤ','พฤหัสบดี'],['ศ','ศุกร์']]
+const HOURS=[9,10,11,13,14,15,16,17]
+const BOOKED=['จ-11','อ-09','อ-10','พ-14','พ-15','พฤ-13','ศ-16','ศ-17']
+const PICKED=['จ-09','จ-10','จ-13']
+const pad=h=>String(h).padStart(2,'0')
+document.getElementById('grid').innerHTML = DAYS.map(([code,label])=>`
+  <div><p class="mb-2 text-center text-sm font-semibold">${label}</p><div class="space-y-1">${
+    HOURS.map(h=>{const id=`${code}-${pad(h)}`
+      const cls = PICKED.includes(id) ? 'border-blue-600 bg-blue-600 font-semibold text-white'
+        : BOOKED.includes(id) ? 'border-gray-200 bg-gray-100 text-gray-400 line-through'
+        : code!=='จ' ? 'border-gray-200 bg-white text-gray-300'
+        : 'border-gray-300 bg-white'
+      return `<div class="w-full rounded border px-1 py-1.5 text-center text-xs ${cls}">${pad(h)}:00</div>`}).join('')
+  }</div></div>`).join('')
+</script>
+</body>
+</html>
