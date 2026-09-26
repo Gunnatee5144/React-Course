@@ -14,7 +14,7 @@ function Summary() {
           รายการที่เลือก ({slots.length}/{MAX_HOURS} ชม.)
         </h1>
         {slots.length > 0 && (
-          <button type="button" onClick={clear} className="text-sm text-red-600 hover:underline">
+          <button type="button" onClick={clear} className="text-sm text-red-600 underline">
             ล้างทั้งหมด
           </button>
         )}

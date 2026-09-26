@@ -6,7 +6,7 @@ import Confirm from './pages/Confirm.jsx'
 
 function App() {
   return (
-    <>
+    <div className="min-h-screen bg-gray-100">
       <Header />
       <main className="mx-auto max-w-4xl p-6">
         <Routes>
@@ -15,7 +15,7 @@ function App() {
           <Route path="/confirm" element={<Confirm />} />
         </Routes>
       </main>
-    </>
+    </div>
   )
 }
 export default App

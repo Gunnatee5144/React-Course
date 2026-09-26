@@ -11,7 +11,7 @@ function Header() {
         🏢 จองห้องประชุม
       </Link>
       <div className="flex items-center gap-4">
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-blue-600 underline">
           จองแล้ว {totalHours} ชม. / สูงสุด {MAX_HOURS} ชม.
         </span>
         <Link to="/summary" className="text-sm text-blue-600 hover:underline">
