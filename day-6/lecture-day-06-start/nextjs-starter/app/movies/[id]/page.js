@@ -8,11 +8,11 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import movies from "../../../data/movies.json";
+import { getMovie } from "../../../data/movies";
 
 export default async function MovieDetail({ params }) {
   const { id } = await params;
-  const movie = movies.find((item) => item.id === id);
+  const movie = await getMovie(id);
 
   if (!movie) {
     notFound();

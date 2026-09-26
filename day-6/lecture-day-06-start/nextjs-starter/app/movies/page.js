@@ -1,8 +1,10 @@
 import Link from "next/link";
-import movies from "../../data/movies.json";
+import { getMovies } from "../../data/movies";
 import LikeButton from "./LikeButton";
 
-export default function MoviesPage() {
+export default async function MoviesPage() {
+  const movies = await getMovies();
+
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
       <header className="mb-10 max-w-2xl">
