@@ -13,7 +13,8 @@ function PokemonDetail() {
   const { has, addMember, removeMember, isFull } = useTeam()
 
   if (loading) return <p className="text-gray-500">กำลังโหลด...</p>
-  if (error) return <p className="text-red-600">ไม่พบ Pokémon นี้</p>
+  if (error && error.message === 'HTTP 404') return <p className="text-red-600">ไม่พบ Pokémon นี้</p>
+  if (error) return <p className="text-red-600">เกิดข้อผิดพลาดในการโหลดข้อมูล ลองใหม่อีกครั้ง</p>
   if (!data) return null
 
   const id = data.id

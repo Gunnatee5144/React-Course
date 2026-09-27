@@ -69,7 +69,122 @@
 
 ยืนยันตัวตนด้วย session ใน cookie แบบ HttpOnly ตรวจเจ้าของข้อมูลและสิทธิ์จาก session ฝั่ง server ทุก mutation และทุก Route Handler ที่เกี่ยวข้อง
 
-## 5. แบ่งงานกันยังไง
+## 5. Global State
+
+เนื่องจากแอปใช้ Next.js Server Components เป็นหลัก จึงไม่ต้องใช้ Global State store ขนาดใหญ่ แต่มีข้อมูลผู้ใช้ที่ Client Component หลายจุดต้องใช้ร่วมกัน จึงเพิ่ม `AuthContext` ด้วย React Context API 1 จุด
+
+**AuthContext:** เก็บข้อมูลผู้ใช้ที่เข้าสู่ระบบ (`id`, `name`, `email`, `role`) โดยอ่านค่าเริ่มต้นจาก session ฝั่ง server แล้วส่งเข้า Provider ที่ครอบอยู่ใน root layout Client Component ที่ต้องรู้ตัวตนหรือสิทธิ์ผู้ใช้ เช่น Navbar, ปุ่มออกจากระบบ, ฟอร์มจองห้อง (`/rooms/[id]/book`) และปุ่มอนุมัติ/ปฏิเสธใน `/admin/bookings` เรียกใช้ค่าจาก context ผ่าน hook `useAuth()` ได้ทันที โดยไม่ต้องส่ง props ลงหลายชั้นและไม่ต้อง fetch ข้อมูลผู้ใช้ซ้ำในแต่ละ component
+
+```tsx
+// context/AuthContext.tsx
+type AuthUser = { id: string; name: string; email: string; role: "USER" | "ADMIN" };
+
+const AuthContext = createContext<AuthUser | null>(null);
+
+export function AuthProvider({ user, children }: { user: AuthUser | null; children: React.ReactNode }) {
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
+```
+
+`app/layout.tsx` (Server Component) อ่าน session แล้วส่งค่าเริ่มต้นให้ `AuthProvider` ครอบ children ทั้งหมด
+
+## 6. Database Schema (Prisma)
+
+โครงสร้างตารางตามที่ระบุในหัวข้อ 4 เขียนเป็น Prisma schema ดังนี้:
+
+```prisma
+enum Role {
+  USER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+model User {
+  id               String    @id @default(cuid())
+  name             String
+  email            String    @unique
+  passwordHash     String
+  department       String?
+  role             Role      @default(USER)
+  createdAt        DateTime  @default(now())
+  bookings         Booking[] @relation("BookingUser")
+  reviewedBookings Booking[] @relation("BookingReviewer")
+}
+
+model Room {
+  id        String          @id @default(cuid())
+  name      String
+  location  String
+  capacity  Int
+  imageUrl  String?
+  isActive  Boolean         @default(true)
+  createdAt DateTime        @default(now())
+  equipment RoomEquipment[]
+  bookings  Booking[]
+}
+
+model Equipment {
+  id    String          @id @default(cuid())
+  name  String          @unique
+  rooms RoomEquipment[]
+}
+
+model RoomEquipment {
+  roomId      String
+  equipmentId String
+  room        Room      @relation(fields: [roomId], references: [id])
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+
+  @@id([roomId, equipmentId])
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  roomId        String
+  userId        String
+  topic         String
+  startTime     DateTime
+  endTime       DateTime
+  attendeeCount Int
+  status        BookingStatus @default(PENDING)
+  adminNote     String?
+  reviewedById  String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  room       Room  @relation(fields: [roomId], references: [id])
+  user       User  @relation("BookingUser", fields: [userId], references: [id])
+  reviewedBy User? @relation("BookingReviewer", fields: [reviewedById], references: [id])
+
+  @@index([roomId, startTime, endTime])
+}
+```
+
+ป้องกันการจองซ้อนเวลาที่ระดับฐานข้อมูล (นอกเหนือจากการตรวจใน Server Action) ด้วย exclusion constraint ผ่าน raw SQL migration:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS btree_gist;
+
+ALTER TABLE "Booking"
+  ADD CONSTRAINT no_overlapping_bookings
+  EXCLUDE USING gist (
+    "roomId" WITH =,
+    tsrange("startTime", "endTime") WITH &&
+  )
+  WHERE (status IN ('PENDING', 'APPROVED'));
+```
+
+## 7. แบ่งงานกันยังไง
 
 การแบ่งงานเบื้องต้นสำหรับสมาชิก 2 คน ปรับชื่อและรหัสก่อนส่ง:
 
